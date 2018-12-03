@@ -1,0 +1,48 @@
+{
+  "android-instant": {
+    "REMOTE_SERVER_ROOT": "",
+    "host": "",
+    "pathPattern": "",
+    "recordPath": "",
+    "scheme": "https",
+    "skipRecord": false
+  },
+  "appKey": "",
+  "appSecret": "",
+  "encryptJs": true,
+  "excludeScenes": [],
+  "fb-instant-games": {},
+  "includeAnySDK": false,
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "jailbreakPlatform": false,
+  "md5Cache": false,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "optimizeHotUpdate": true,
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.bounce",
+  "privateKey": "",
+  "qqplay": {
+    "REMOTE_SERVER_ROOT": "",
+    "orientation": "portrait"
+  },
+  "startScene": "001a218f-e8ec-454d-a8dd-63df8777ef02",
+  "title": "PJGame",
+  "webOrientation": "portrait",
+  "wechatgame": {
+    "REMOTE_SERVER_ROOT": "https://wxxcx.jufoinfo.com",
+    "appid": "wx82ab7c05b9a737e3",
+    "isSubdomain": false,
+    "orientation": "portrait",
+    "subContext": "open_data"
+  },
+  "xxteaKey": "a9714c33-8fe9-4c",
+  "zipCompressJs": true
+}
