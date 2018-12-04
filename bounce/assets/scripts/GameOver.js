@@ -36,7 +36,7 @@ cc.Class({
                     destWidth: 500,
                     destHeight: 400
                   }),
-                  query:"uid="+uid,
+                query:"gameStat=0&uid="+uid,
                 success(res){
                     console.log("转发成功！");
                 },
@@ -60,7 +60,7 @@ cc.Class({
                     destWidth: 500,
                     destHeight: 400
                   }),
-                  query:"gameStat=1&uid="+uid + "&score=" + mScore + "&time="+time,
+                query:"gameStat=1&uid="+ uid + "&score=" + mScore + "&time="+time,
                     
                 success(res){
                     console.log("转发成功！");

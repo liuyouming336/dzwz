@@ -143,31 +143,34 @@ cc.Class({
                     node.parent = rankItem;
                     node.x = -291;
                     var sp = node.addComponent(cc.Sprite);
+                    // console.log("第一名");
                     //sp.spriteFrame = this.sprite;
                     cc.loader.loadRes("texture/rank/one", cc.SpriteFrame, function (err, spriteFrame) {
                         node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
                     });
                 }
                 //这个是第二名的时候
-                else if(i==1){
-                    var node = new cc.Node('Sprite1');
-                    node.parent = rankItem;
-                    node.x = -291;
-                    var sp = node.addComponent(cc.Sprite);
+                if(i==1){
+                    var node1 = new cc.Node('Sprite1');
+                    node1.parent = rankItem;
+                    node1.x = -291;
+                    // console.log("第二名");
+                    var sp = node1.addComponent(cc.Sprite);
                     //sp.spriteFrame = this.sprite;
                     cc.loader.loadRes("texture/rank/two", cc.SpriteFrame, function (err, spriteFrame) {
-                        node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                        node1.getComponent(cc.Sprite).spriteFrame = spriteFrame;
                     });
                 }
                 //这个是第三名的时候
-                else if(i==2){
-                    var node = new cc.Node('Sprite2');
-                    node.parent = rankItem;
-                    node.x = -291;
-                    var sp = node.addComponent(cc.Sprite);
+                if(i==2){
+                    var node2 = new cc.Node('Sprite2');
+                    node2.parent = rankItem;
+                    // console.log("第三名");
+                    node2.x = -291;
+                    var sp = node2.addComponent(cc.Sprite);
                     //sp.spriteFrame = this.sprite;
                     cc.loader.loadRes("texture/rank/three", cc.SpriteFrame, function (err, spriteFrame) {
-                        node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                        node2.getComponent(cc.Sprite).spriteFrame = spriteFrame;
                     });
                 }
                 else{

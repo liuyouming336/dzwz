@@ -20,7 +20,7 @@ cc.Class({
             wx.request({
                 url: 'https://wxxcx.jufoinfo.com/index.php?m=moli&a=recommend_users',
                 data: {
-                //    openid:uid,
+                //openid:uid,
                    openid: "ojdYzswpGblgLOoPDH5Zb_vVqyrE",
                    token:'Yzs4eeWywtV9c8TSxjdlihF8A'
                 },
@@ -41,6 +41,7 @@ cc.Class({
             wx.shareAppMessage({
                 title:"欢迎来到王者荣耀！",
                 imageUrl:"https://wx.qlogo.cn/mmopen/vi_32/PiajxSqBRaEJNUKAhvG8aPyZg9xlP5nfpHPYlqpYY1ibF6A3T0HLgGAxKQtXwcIukulm3rYPVPyuE5x2zQLHhdkA/132",
+                query:"gameStat=0&uid="+uid,
                 success(res){
                     console.log("转发成功！");
                 },

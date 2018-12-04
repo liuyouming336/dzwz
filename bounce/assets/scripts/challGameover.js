@@ -13,14 +13,14 @@ cc.Class({
         this.getChallangeData(uid,this.first);
         this.getChallangeData(changeUid,this.second);
         //判断是否挑战成功来显示相对应的图片
-        if(score>changeScore){
-            this.winner.node.active = true;
-            this.defeated.node.active = false;
-        }
-        else{
-            this.winner.node.active = false;
-            this.defeated.node.active = true;
-        }
+        // if(mScore>changeScore){
+        //     this.winner.node.active = true;
+        //     this.defeated.node.active = false;
+        // }
+        // else{
+        //     this.winner.node.active = false;
+        //     this.defeated.node.active = true;
+        // }
     },
      //继续挑战
     onBtnChallangeClick:function(){
@@ -30,6 +30,7 @@ cc.Class({
     //不挑战直接开始
     onBtnNoChallangeClick:function(){
         gameStat = 0;
+        isshowChall = true;
         cc.director.loadScene("bounceGame");
     },
     test:function(){
@@ -49,12 +50,13 @@ cc.Class({
             panel.getChildByName("headiing").getComponent(cc.Sprite).spriteFrame = sprite;
         });
 
-        this.defeated.active = (mScore<changeScore?true:false);
-        this.winner.active = (mScore>changeScore?true:false);
+        self.defeated.active = (mScore<changeScore?true:false);
+        self.winner.active = (mScore>changeScore?true:false);
     },
     //通过uid获取被挑战着玩家信息
     getChallangeData:function(opuid,paneel){
-        if(cc.sys.platform == cc.sys.WECHAT_GAME){
+        var self = this;
+        if(cc.sys.platform == cc.sys.WECHAT_GAME){ 
             wx.request({
                 url:'https://wxxcx.jufoinfo.com/index.php?m=moli&a=userdetail',
                 data: {
@@ -69,15 +71,20 @@ cc.Class({
                     var data = res.data;
                     if(data.code==200){
                         console.log(data);
-
                         var url = data.data.user[0].avatar;
-                        // console.log(data);
-                        self.lblName.string = data.data.user[0].nickname;
-                        self.lbl_money.string = data.data.user[0].gold;
-                        glob = data.data.user[0].gold;
+                        var nickname = data.data.user[0].nickname;
+                        // self.lbl_money.string = data.data.user[0].gold;
+                        // glob = data.data.user[0].gold;
                         // self.setGolb(data.data.gold);
-                        var score = 19;
-                        this.showChallageInfo(paneel,data.data.user[0].nickname,url,score)
+                        if(opuid == uid){
+                           
+                            var scoreMe = mScore;
+                            self.showChallageInfo(paneel,nickname,url,scoreMe);
+                        }
+                        else{
+                            var score = changeScore;
+                            self.showChallageInfo(paneel,nickname,url,score);
+                        }
                     }
                     else{
                         console.log(res);

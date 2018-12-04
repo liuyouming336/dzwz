@@ -23,6 +23,7 @@ cc.Class({
     //不挑战直接开始
     onBtnNoChallangeClick:function(){
         gameStat = 0;
+        isshowChall = true;
         cc.director.loadScene("bounceGame");
     },
     //测试
@@ -45,6 +46,7 @@ cc.Class({
     },
     //通过uid获取被挑战着玩家信息
     getChallangeData:function(ouid){
+        var self = this;
         if(cc.sys.platform == cc.sys.WECHAT_GAME){
             wx.request({
                 url:'https://wxxcx.jufoinfo.com/index.php?m=moli&a=userdetail',
@@ -63,8 +65,8 @@ cc.Class({
                         var url = data.data.user[0].avatar;
                         // console.log(data);
                         var name = data.data.user[0].nickname;
-                        var score = 19;
-                        this.showChallageInfo(name,url,score)
+                        var score = changeScore;
+                        self.showChallageInfo(name,url,score)
                     }
                     else{
                         console.log(res);

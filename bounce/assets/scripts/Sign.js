@@ -27,7 +27,11 @@ cc.Class({
     getSignData:function(){
         var self = this;
         var data = new Date();
-        var todayTime = data.getFullYear().toString()+(data.getMonth()+1).toString()+data.getDate().toString();
+        var day = data.getDate().toString();
+        if(day.length<=1){
+            day="0"+day;
+        }
+        var todayTime = data.getFullYear().toString()+(data.getMonth()+1).toString()+day;
         
         // var todayTime = "20181127";
         // var signData =cc.sys.localStorage.getItem("sign");
@@ -109,7 +113,11 @@ cc.Class({
         if(!this._isSign){
             this.hetSignGift(this._HassignDay);
             var data = new Date();
-            var time = data.getFullYear().toString()+(data.getMonth()+1).toString()+data.getDate().toString();
+            var day = data.getDate().toString();
+            if(day.length<=1){
+                day="0"+day;
+            }
+            var time = data.getFullYear().toString()+(data.getMonth()+1).toString()+day;
             // time = "20181127";
             this._isSign = true;
             var db = wx.cloud.database(); 
@@ -150,15 +158,15 @@ cc.Class({
         }
         else{
             alert.show(this.node.parent,"你今天已经签到过了!");
-            console.log("你今天已经签到过了!");
+            // console.log("你今天已经签到过了!");
         }
     },
 
     hetSignGift:function(index){
         this.panelGift.children[index].getChildByName("hasSign").active = true;
-        console.log("aaa");
-        console.log(glob+"签到完前的金币!");
-        console.log(this.singGiftNum[index])
+        // console.log("aaa");
+        // console.log(glob+"签到完前的金币!");
+        // console.log(this.singGiftNum[index])
         //签到送金币请求
         wx.request({
             url: 'https://wxxcx.jufoinfo.com/index.php?m=moli&a=checkin',

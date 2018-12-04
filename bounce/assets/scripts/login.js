@@ -8,6 +8,7 @@ window.changeScore = 0;
 window.changeTime = 0;
 window.invatOpenid = 0;
 window.isPlayBg = true;
+window.isshowChall = false;
 window.alert = new (require("Alert")) ();
 
 cc.Class({
@@ -32,43 +33,45 @@ cc.Class({
         var self = this;
         this.node.on('addGlob',function(event){
             event.stopPropagation();
-            console.log("aaaa");
+            // console.log("aaaa");
             self.test();
         });
          //播放背景音乐
         audioMgr.playBgm("bg.mp3");
         //显示音乐播放按钮图片显示
-        this.showSetting()
+        this.showSetting();
         this.headImg.node.active = false;
         this.rule_panel.active = false;
         if(cc.sys.platform == cc.sys.WECHAT_GAME){
-            console.log("aaaaa00");
+            // console.log("aaaaa00");
             var shareDat = wx.getLaunchOptionsSync().query;
-            console.log(shareDat);
-            //待会记得打开
-            if(shareDat.data!=null&&shareDat.data!=undefined){
-                //gameStat  0正常游戏界面 1 战斗游戏界面
-                //通过玩家最开始进入获取share中的query字段  如果有  就是好友邀请战斗
-                //
+            if(JSON.stringify(shareDat)!="{}" &&!isshowChall){
                 gameStat = shareDat.gameStat;
+                 // gameStat 0 正常游戏模式  1 挑战游戏模式
                 if(gameStat == 1){
+                    // console.log("挑战模式");
+                    // isshowChall = true;
                     changeUid = shareDat.uid;
                     changeScore = shareDat.score;
                     changeTime = shareDat.time;
+                    this.panelChallange.active = true;
+                    var challange = this.panelChallange.getComponent("challangeFri");
+                    challange.getChallangeData(changeUid);
                 }
                 else{
                     invatOpenid = shareDat.uid;
+                    this.panelChallange.active = false;
                 }
             }
+            console.log(shareDat);
+            //待会记得打开
+            // if(shareDat!=null&&shareDat!=undefined){
+                //gameStat  0正常游戏界面 1 战斗游戏界面
+                //通过玩家最开始进入获取share中的query字段  如果有  就是好友邀请战斗
+                //
+            // }
             console.log(gameStat + "gameStat");
-        }
-        // gameStat 0 正常游戏模式  1 挑战游戏模式
-        if(gameStat == 1){
-            console.log("挑战模式");
-            this.panelChallange.active = true;
-            var challange = this.panelChallange.getComponent("challangeFri");
-            challange.getChallangeData(changeUid);
-        }
+        } 
     },
     //惊喜按钮
     onBtnSurClick:function(){
@@ -84,12 +87,14 @@ cc.Class({
         if(cc.sys.platform == cc.sys.WECHAT_GAME){
             wx.cloud.init({
                 env: 'game-d0c4e1'
+                // env: 'game-43424e'
             });
             wx.cloud.callFunction({
                 name: 'login',
                 complete: res => {
                   console.log(res);
-                  console.log('callFunction test result: ', res.result.userInfo.openId);
+                  console.log('callFunction test result userInfo openId: ', res.result.userInfo.openId);
+                //   uid = res.result.openid;
                   uid = res.result.userInfo.openId;
                   self.onGetUserInfo(); 
                 }
@@ -102,7 +107,6 @@ cc.Class({
         // var self = this;
         this.lbl_money.string = glob;
         console.log("增加金币！"+ glob);
-
         // db.collection('userData').doc(uid).update({
         //     data: {
         //         // 表示指示数据库将字段自增 10
@@ -114,7 +118,6 @@ cc.Class({
         // })
     },
     start () {
-       
         // this.lbl_money.string = glob;
     },
     //获取用户信息
@@ -155,10 +158,10 @@ cc.Class({
                             console.log(res);
                             userbutton.hide();
                             var data = res.userInfo;
-                            if(invatOpenid){
-                                //说明是有别人邀请进来的  然后就把这个id加到自己邀请的id
-                                // invatOpenid = 
-                            }
+                            // if(invatOpenid){
+                            //     //说明是有别人邀请进来的  然后就把这个id加到自己邀请的id
+                            //     // invatOpenid = invatOpenid
+                            // }
                             wx.request({
                                 url: 'https://wxxcx.jufoinfo.com/index.php?m=moli&a=usercheck',
                                 data: {
